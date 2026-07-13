@@ -1,0 +1,13 @@
+{
+  "name": "word-of-the-day",
+  "version": "1.0.0",
+  "description": "Daily Mexican Spanish word of the day, posted to Discord via Claude API",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
