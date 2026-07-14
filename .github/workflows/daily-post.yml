@@ -5,6 +5,9 @@ on:
     - cron: "0 14 * * *"
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   post-word-of-the-day:
     runs-on: ubuntu-latest
@@ -23,3 +26,11 @@ jobs:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
         run: node index.js
+
+      - name: Commit updated word list
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add used-words.json
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update used-words.json"
+          git push
